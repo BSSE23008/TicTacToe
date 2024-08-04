@@ -1,2 +1,5 @@
-# TicTacToe
-A simple console app game in Java.
+## TicTacToe
+
+Console Game (x, 0)
+
+
