@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Tic Tac Toe</title>
+</head>
+
+<body>
+	<script>
+		// Paste the entire JavaScript game code here inside this script tag
+		// For example:
+
+		function switchPlayer(player) {
+			return player === 'X' ? 'Y' : 'X';
+		}
+
+		function printBoard(board) {
+			console.log("\n___________________");
+			for (let i = 0; i < 3; i++) {
+				let row = "|  ";
+				for (let j = 0; j < 3; j++) {
+					row += board[i][j] + "  |  ";
+				}
+				console.log(row);
+				console.log("|_____|_____|_____|");
+			}
+			console.log();
+		}
+
+		function isBoardFull(board) {
+			for (let i = 0; i < 3; i++) {
+				for (let j = 0; j < 3; j++) {
+					if (board[i][j] !== 'X' && board[i][j] !== 'Y') {
+						return false;
+					}
+				}
+			}
+			return true;
+		}
+
+		function isGameOver(board, player) {
+			for (let i = 0; i < 3; i++) {
+				if (board[i][0] === player && board[i][1] === player && board[i][2] === player) {
+					return true;
+				}
+			}
+
+			for (let j = 0; j < 3; j++) {
+				if (board[0][j] === player && board[1][j] === player && board[2][j] === player) {
+					return true;
+				}
+			}
+
+			if (board[0][0] === player && board[1][1] === player && board[2][2] === player) {
+				return true;
+			}
+
+			if (board[0][2] === player && board[1][1] === player && board[2][0] === player) {
+				return true;
+			}
+
+			return false;
+		}
+
+		function isValidMove(board, playerSign, moveChar) {
+			for (let i = 0; i < 3; i++) {
+				for (let j = 0; j < 3; j++) {
+					if (board[i][j] === moveChar) {
+						board[i][j] = playerSign;
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+
+		function main() {
+			let board = [
+				['1', '2', '3'],
+				['4', '5', '6'],
+				['7', '8', '9']
+			];
+
+			let player = 'X';
+			let is_draw = false;
+
+			while (true) {
+				console.log("\n___________________________________________\n");
+				printBoard(board);
+
+				let moveMade = false;
+				while (!moveMade) {
+					let move = prompt(`Player ${player} turn!\nEnter a number (1-9):`);
+					if (isValidMove(board, player, move)) {
+						moveMade = true;
+					} else {
+						console.log("Invalid move. Try again!");
+					}
+				}
+
+				if (isGameOver(board, player)) {
+					break;
+				} else if (isBoardFull(board)) {
+					is_draw = true;
+					break;
+				} else {
+					player = switchPlayer(player);
+				}
+			}
+
+			console.log("\nFINAL RESULT");
+			printBoard(board);
+			if (is_draw) {
+				console.log("IT'S A DRAW :(");
+			} else {
+				console.log(`${player} has won :)`);
+			}
+		}
+
+		main();
+	</script>
+</body>
+
+</html>
