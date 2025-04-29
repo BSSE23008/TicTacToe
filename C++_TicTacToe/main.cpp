@@ -22,12 +22,12 @@ void printBoard(char (*board)[3]) {
 bool isBoardFull (char board[][3]) { 
     for (int i=0; i<3; i++) { 
         for (int j=0; j<3; j++) { 
-            if (board[i][j] != 'X' && board[i][j] != 'Y') { 
+            if (board[i][j] != 'X' && board[i][j] != 'Y') { // if Not X and Not Y, it means that the box is empty
                 return false; 
             }
         }
     }
-    return true; 
+    return true; // otherwise filled
 }
 
 
@@ -64,13 +64,13 @@ bool isGameOver(char (*board)[3], char player) {
 bool isValidMove(char (*board)[3], char playerSign, char move) { 
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) { 
-            if (board[i][j] == move) {
+            if (board[i][j] == move) {  // if that box isn't occupied, assign that box -> the player sign
                 board[i][j] = playerSign;
                 return true; 
             }
         }
     }
-    return false; 
+    return false; // otherwise box is occupied 
 }
 
 
